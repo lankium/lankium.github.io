@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yijun.love","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Python 读取服务器状态连接服务器1. paramiko -通过SSH连接服务器直接使用SSH协议对远程服务器执行操作 连接服务器1234567891011121314151617181920212223import paramikofrom paramiko import SSHClient, AutoAddPolicy, RSAKeydef ssh_login_with_password(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python读取服务器状态">
+<meta property="og:url" content="http://yijun.love/2024/11/18/Python%E8%AF%BB%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81/index.html">
+<meta property="og:site_name" content="YiJun">
+<meta property="og:description" content="Python 读取服务器状态连接服务器1. paramiko -通过SSH连接服务器直接使用SSH协议对远程服务器执行操作 连接服务器1234567891011121314151617181920212223import paramikofrom paramiko import SSHClient, AutoAddPolicy, RSAKeydef ssh_login_with_password(">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-18T01:53:11.000Z">
+<meta property="article:modified_time" content="2024-12-30T06:44:57.101Z">
+<meta property="article:author" content="YiJun">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yijun.love/2024/11/18/Python%E8%AF%BB%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yijun.love/2024/11/18/Python%E8%AF%BB%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81/","path":"2024/11/18/Python读取服务器状态/","title":"Python读取服务器状态"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python读取服务器状态 | YiJun</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YiJun</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-%E8%AF%BB%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number">1.</span> <span class="nav-text">Python 读取服务器状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">连接服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-paramiko-%E9%80%9A%E8%BF%87SSH%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. paramiko -通过SSH连接服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8-1"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">连接服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">读取状态信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">处理状态信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">显示状态信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%B3%BB%E7%BB%9F%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81"><span class="nav-number">1.2.</span> <span class="nav-text">获取进程和系统运行状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-psutil"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.psutil</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BB%A5%E4%B8%8B%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">获取以下信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text">查看操作系统相关信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8BCPU%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.2.2.</span> <span class="nav-text">查看CPU相关信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.2.3.</span> <span class="nav-text">查看内存相关信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%A1%AC%E7%9B%98%E5%AD%98%E5%82%A8%E5%92%8CIO%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.2.4.</span> <span class="nav-text">查看硬盘存储和IO相关信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.2.5.</span> <span class="nav-text">查看网络相关信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-cpuinfo"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">2.cpuinfo</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%93%E9%97%A8%E7%94%A8%E4%BA%8E%E8%8E%B7%E5%8F%96-CPU-%E7%9A%84%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF-%E5%A6%82%E5%9E%8B%E5%8F%B7%E3%80%81%E6%9E%B6%E6%9E%84%E3%80%81%E9%A2%91%E7%8E%87%E7%AD%89"><span class="nav-number">1.2.1.3.1.</span> <span class="nav-text">专门用于获取 CPU 的详细信息,如型号、架构、频率等</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">YiJun</p>
+  <div class="site-description" itemprop="description">记录</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yijun.love/2024/11/18/Python%E8%AF%BB%E5%8F%96%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8A%B6%E6%80%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YiJun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YiJun">
+      <meta itemprop="description" content="记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python读取服务器状态 | YiJun">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python读取服务器状态
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-11-18 09:53:11" itemprop="dateCreated datePublished" datetime="2024-11-18T09:53:11+08:00">2024-11-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-12-30 14:44:57" itemprop="dateModified" datetime="2024-12-30T14:44:57+08:00">2024-12-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Python-读取服务器状态"><a href="#Python-读取服务器状态" class="headerlink" title="Python 读取服务器状态"></a>Python 读取服务器状态</h1><h2 id="连接服务器"><a href="#连接服务器" class="headerlink" title="连接服务器"></a>连接服务器</h2><h3 id="1-paramiko-通过SSH连接服务器"><a href="#1-paramiko-通过SSH连接服务器" class="headerlink" title="1. paramiko -通过SSH连接服务器"></a>1. paramiko -通过SSH连接服务器</h3><p>直接使用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=SSH%E5%8D%8F%E8%AE%AE&spm=1001.2101.3001.7020">SSH协议</a>对远程服务器执行操作</p>
+<h4 id="连接服务器-1"><a href="#连接服务器-1" class="headerlink" title="连接服务器"></a>连接服务器</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="keyword">from</span> paramiko <span class="keyword">import</span> SSHClient, AutoAddPolicy, RSAKey</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ssh_login_with_password</span>(<span class="params">ip, username, password</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        client = SSHClient()</span><br><span class="line">        client.set_missing_host_key_policy(AutoAddPolicy())</span><br><span class="line">        client.connect(ip, username=username, password=password, timeout=<span class="number">5</span>)</span><br><span class="line">        client.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ssh_login_with_key</span>(<span class="params">ip, username, key_path</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        client = SSHClient()</span><br><span class="line">        client.set_missing_host_key_policy(AutoAddPolicy())</span><br><span class="line">        key = RSAKey.from_private_key_file(key_path)</span><br><span class="line">        client.connect(ip, username=username, pkey=key, timeout=<span class="number">5</span>)</span><br><span class="line">        client.close()</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="读取状态信息"><a href="#读取状态信息" class="headerlink" title="读取状态信息"></a>读取状态信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 执行命令</span></span><br><span class="line">stdin, stdout, stderr = client.exec_command(<span class="string">&#x27;vmstat&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取输出</span></span><br><span class="line">output = stdout.read().decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="处理状态信息"><a href="#处理状态信息" class="headerlink" title="处理状态信息"></a>处理状态信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 处理状态信息</span></span><br><span class="line">lines = output.strip().split(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">headers = lines[<span class="number">0</span>].split()</span><br><span class="line">data = lines[<span class="number">2</span>].split()</span><br><span class="line">status = <span class="built_in">dict</span>(<span class="built_in">zip</span>(headers, data))</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="显示状态信息"><a href="#显示状态信息" class="headerlink" title="显示状态信息"></a>显示状态信息</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示状态信息</span></span><br><span class="line"><span class="keyword">for</span> key, value <span class="keyword">in</span> status.items():</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;key&#125;</span>: <span class="subst">&#123;value&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取进程和系统运行状态"><a href="#获取进程和系统运行状态" class="headerlink" title="获取进程和系统运行状态"></a>获取进程和系统运行状态</h2><h3 id="1-psutil"><a href="#1-psutil" class="headerlink" title="1.psutil"></a>1.psutil</h3><h4 id="获取以下信息"><a href="#获取以下信息" class="headerlink" title="获取以下信息"></a>获取以下信息</h4><ul>
+<li>进程信息：包括进程ID、进程名称、进程状态等。</li>
+<li>CPU信息：包括CPU数量、CPU使用率、每个CPU的使用率等。</li>
+<li>内存信息：包括总内存、已使用内存、空闲内存等。</li>
+<li>磁盘信息：包括磁盘使用率、磁盘IO等。</li>
+<li>网络信息：包括网络接口、网络连接数等。</li>
+<li>传感器信息：包括温度、湿度等信息。</li>
+</ul>
+<h4 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h4><ul>
+<li>获取进程信息：可以使用 psutil.Process(pid) 方法获取指定进程的信息，其中 pid 是进程ID。</li>
+<li>获取系统信息：可以使用 psutil.virtual_memory() 和 psutil.cpu_percent(interval&#x3D;1) 等方法获取系统信息。</li>
+<li>监控磁盘信息：可以使用 psutil.disk_usage(‘&#x2F;’) 方法获取磁盘使用率信息。</li>
+<li>监控网络信息：可以使用 psutil.net_io_counters() 方法获取网络IO信息。</li>
+<li>管理进程：可以使用 psutil.Process(pid).kill() 方法杀死指定进程</li>
+</ul>
+<h5 id="查看操作系统相关信息"><a href="#查看操作系统相关信息" class="headerlink" title="查看操作系统相关信息"></a>查看操作系统相关信息</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">Users = psutil.users()  <span class="comment"># 查看当前登录的用户信息，列表类型。包括：name: 用户名  terminal: 终端  host: 主机地址  started: 登录时间  pid: 进程id</span></span><br><span class="line">BootTime = datetime.fromtimestamp(psutil.boot_time())  <span class="comment"># 查看系统的启动时间 2022-12-12 08:40:05</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="查看CPU相关信息"><a href="#查看CPU相关信息" class="headerlink" title="查看CPU相关信息"></a>查看CPU相关信息</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line"></span><br><span class="line">CpuLogicCoreCount = psutil.cpu_count()  <span class="comment"># CPU逻辑核心数 &#x27;8&#x27;</span></span><br><span class="line">CpuPhysicalCoreCount = psutil.cpu_count(logical=<span class="literal">False</span>)  <span class="comment"># CPU物理核心数 &#x27;4&#x27;</span></span><br><span class="line">CPUPercent = psutil.cpu_percent(interval=<span class="number">1</span>, percpu=<span class="literal">True</span>)  <span class="comment"># CPU使用率，列表显示，interval表示刷新间隔，列表中的元素代表每个CPU逻辑核心 [6.1, 1.5, 4.6, 7.7, 10.8, 1.5, 1.5, 1.5]</span></span><br><span class="line">CPUFreq = psutil.cpu_freq()  <span class="comment"># CPU频率 scpufreq(current=3408.0, min=0.0, max=3408.0)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="查看内存相关信息"><a href="#查看内存相关信息" class="headerlink" title="查看内存相关信息"></a>查看内存相关信息</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line">VirtualMemory = psutil.virtual_memory()  <span class="comment"># 内存使用情况 svmem(total=8480059392, available=1381511168, percent=83.7, used=7098548224, free=1381511168) total: 总内存 available: 可用内存</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="查看硬盘存储和IO相关信息"><a href="#查看硬盘存储和IO相关信息" class="headerlink" title="查看硬盘存储和IO相关信息"></a>查看硬盘存储和IO相关信息</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line">DiskPartitions = psutil.disk_partitions(<span class="built_in">all</span>=<span class="literal">True</span>)</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">[sdiskpart(device=&#x27;C:\\&#x27;, mountpoint=&#x27;C:\\&#x27;, fstype=&#x27;NTFS&#x27;, opts=&#x27;rw,fixed&#x27;),</span></span><br><span class="line"><span class="string"> sdiskpart(device=&#x27;D:\\&#x27;, mountpoint=&#x27;D:\\&#x27;, fstype=&#x27;NTFS&#x27;, opts=&#x27;rw,fixed&#x27;),</span></span><br><span class="line"><span class="string"> sdiskpart(device=&#x27;E:\\&#x27;, mountpoint=&#x27;E:\\&#x27;, fstype=&#x27;NTFS&#x27;, opts=&#x27;rw,fixed&#x27;)]</span></span><br><span class="line"><span class="string"># 可以看到一共有三个盘符，fstype表示文件系统格式是NTFS，opts中的rw表示可读写</span></span><br><span class="line"><span class="string"># 里面有一个参数 all, 默认为 False, 如果指定为 True, 那么返回的内容还会包含 /proc 等特殊文件系统的挂载信息，由于我这里是 Windows, 所以两者没区别</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">DiskUsage = psutil.disk_usage(<span class="string">&#x27;C:&#x27;</span>)  <span class="comment"># 磁盘使用情况 sdiskusage(total=84821807104, used=66361847808, free=18459959296, percent=78.2)</span></span><br><span class="line">DiskIOCounters = psutil.disk_io_counters(perdisk=<span class="literal">False</span>)  <span class="comment"># 磁盘IO统计信息 sdiskio(read_count=4612339, write_count=1834298, read_bytes=116422007808, write_bytes=61427764224, read_time=12831, write_time=4321)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">read_count: 读次数                     write_count: 写次数</span></span><br><span class="line"><span class="string">read_bytes: 读的字节数                 write_bytes: 写的字节数</span></span><br><span class="line"><span class="string">read_time: 读时间                      write_time: 写时间</span></span><br><span class="line"><span class="string">默认返回的是所有磁盘加起来的统计信息，我们可以指定 perdisk=True，则分别列出每一个磁盘的统计信息。</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="查看网络相关信息"><a href="#查看网络相关信息" class="headerlink" title="查看网络相关信息"></a>查看网络相关信息</h5><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> psutil</span><br><span class="line">NetIOCounters = psutil.net_io_counters(pernic=<span class="literal">False</span>)  <span class="comment"># 网络 IO 统计信息 snetio(bytes_sent=873520263, bytes_recv=311085337, packets_sent=1091582, packets_recv=1259384, errin=0, errout=0, dropin=0, dropout=0)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># bytes_sent: 发送的字节数</span></span><br><span class="line"><span class="string"># bytes_recv: 接收的字节数</span></span><br><span class="line"><span class="string"># packets_sent: 发送的包数据量</span></span><br><span class="line"><span class="string"># packets_recv: 接收的包数据量</span></span><br><span class="line"><span class="string"># errin: 接收包时, 出错的次数</span></span><br><span class="line"><span class="string"># errout: 发送包时, 出错的次数</span></span><br><span class="line"><span class="string"># dropin: 接收包时, 丢弃的次数</span></span><br><span class="line"><span class="string"># dropout: 发送包时, 丢弃的次数</span></span><br><span class="line"><span class="string">里面还有一个 pernic 参数, 如果为 True, 则列出所有网卡的信息</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">NetIfAddrs = psutil.net_if_addrs()  <span class="comment"># 以字典的形式返回网卡的配置信息, 包括 IP 地址、Mac地址、子网掩码、广播地址等等</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&#123;&#x27;Loopback Pseudo-Interface 1&#x27;: [snicaddr(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&#x27;127.0.0.1&#x27;, netmask=&#x27;255.0.0.0&#x27;, broadcast=None, ptp=None),</span></span><br><span class="line"><span class="string">                         snicaddr(family=&lt;AddressFamily.AF_INET6: 23&gt;, address=&#x27;::1&#x27;, netmask=None, broadcast=None, ptp=None)],</span></span><br><span class="line"><span class="string"> &#x27;本地连接&#x27;: [snicaddr(family=&lt;AddressFamily.AF_LINK: -1&gt;, address=&#x27;10-E7-C6-2D-AB-2C&#x27;, netmask=None, broadcast=None, ptp=None),</span></span><br><span class="line"><span class="string">  snicaddr(family=&lt;AddressFamily.AF_INET: 2&gt;, address=&#x27;10.36.23.50&#x27;, netmask=&#x27;255.255.255.0&#x27;, broadcast=None, ptp=None),</span></span><br><span class="line"><span class="string">  snicaddr(family=&lt;AddressFamily.AF_INET6: 23&gt;, address=&#x27;fe80::d472:4d86:72f6:4da1&#x27;, netmask=None, broadcast=None, ptp=None)]&#125;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">NetIfStats = psutil.net_if_stats()  <span class="comment"># 返回网卡的详细信息, 包括是否启动、通信类型、传输速度、mtu</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&#123;&#x27;Loopback Pseudo-Interface 1&#x27;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: 2&gt;, speed=1073, mtu=1500),</span></span><br><span class="line"><span class="string"> &#x27;本地连接&#x27;: snicstats(isup=True, duplex=&lt;NicDuplex.NIC_DUPLEX_FULL: 2&gt;, speed=100, mtu=1500)&#125;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">NetConnections = psutil.net_connections(kind=<span class="string">&#x27;inet&#x27;</span>)  <span class="comment"># 以列表的形式返回每个网络连接的详细信息</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">[sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=1, laddr=addr(ip=&#x27;127.0.0.1&#x27;, port=57096), raddr=addr(ip=&#x27;127.0.0.1&#x27;, port=57095), status=&#x27;ESTABLISHED&#x27;, pid=7456),</span></span><br><span class="line"><span class="string"> sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=1, laddr=addr(ip=&#x27;127.0.0.1&#x27;, port=57230), raddr=addr(ip=&#x27;127.0.0.1&#x27;, port=57229), status=&#x27;ESTABLISHED&#x27;, pid=20992),</span></span><br><span class="line"><span class="string"> sconn(fd=-1, family=&lt;AddressFamily.AF_INET: 2&gt;, type=1, laddr=addr(ip=&#x27;127.0.0.1&#x27;, port=57184), raddr=addr(ip=&#x27;127.0.0.1&#x27;, port=57251), status=&#x27;ESTABLISHED&#x27;, pid=20992)]</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line"><span class="string">里面接受一个参数, 默认是 &quot;inet&quot;, 当然我们也可以指定为其它, 比如 &quot;tcp&quot;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-cpuinfo"><a href="#2-cpuinfo" class="headerlink" title="2.cpuinfo"></a>2.cpuinfo</h4><h5 id="专门用于获取-CPU-的详细信息-如型号、架构、频率等"><a href="#专门用于获取-CPU-的详细信息-如型号、架构、频率等" class="headerlink" title="专门用于获取 CPU 的详细信息,如型号、架构、频率等"></a>专门用于获取 CPU 的详细信息,如型号、架构、频率等</h5>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/15/Element-plus/" rel="prev" title="Element-plus">
+                  <i class="fa fa-angle-left"></i> Element-plus
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/26/Wis/" rel="next" title="Wis">
+                  Wis <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YiJun</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
