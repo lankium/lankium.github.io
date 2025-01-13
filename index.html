@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -138,6 +138,442 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://yijun.love/2025/01/13/python-numpy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YiJun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YiJun">
+      <meta itemprop="description" content="记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | YiJun">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/01/13/python-numpy/" class="post-title-link" itemprop="url">python_numpy</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-13 10:57:42 / 修改时间：16:35:37" itemprop="dateCreated datePublished" datetime="2025-01-13T10:57:42+08:00">2025-01-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="NumPy-简介"><a href="#NumPy-简介" class="headerlink" title="NumPy 简介"></a><strong>NumPy 简介</strong></h2><p>NumPy 是 Python 中处理多维数组和矩阵的核心库，提供了高效的数组运算功能，是数据科学、机器学习和科学计算的重要工具。</p>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h3><ol>
+<li><strong>多维数组对象</strong> (<code>ndarray</code>)：用于存储单一数据类型的矩阵。</li>
+<li><strong>广播机制</strong>：支持不同形状数组的运算。</li>
+<li><strong>高效性</strong>：使用底层 C 实现的高性能计算。</li>
+<li><strong>丰富的函数库</strong>：内置许多数学、统计和线性代数功能。</li>
+</ol>
+<h2 id="常用模块与函数"><a href="#常用模块与函数" class="headerlink" title="常用模块与函数"></a><strong>常用模块与函数</strong></h2><h3 id="1-数组创建"><a href="#1-数组创建" class="headerlink" title="1. 数组创建"></a><strong>1. 数组创建</strong></h3><p>这些函数用于创建 NumPy 数组。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.array</code></td>
+<td>从列表或元组创建数组</td>
+<td><code>np.array([1, 2, 3])</code></td>
+</tr>
+<tr>
+<td><code>np.zeros</code></td>
+<td>创建全零数组</td>
+<td><code>np.zeros((3, 2))</code></td>
+</tr>
+<tr>
+<td><code>np.ones</code></td>
+<td>创建全一数组</td>
+<td><code>np.ones((2, 2))</code></td>
+</tr>
+<tr>
+<td><code>np.full</code></td>
+<td>创建指定值填充的数组</td>
+<td><code>np.full((2, 3), 5)</code></td>
+</tr>
+<tr>
+<td><code>np.eye</code></td>
+<td>创建单位矩阵</td>
+<td><code>np.eye(3)</code></td>
+</tr>
+<tr>
+<td><code>np.empty</code></td>
+<td>创建未初始化的数组（内容随机）</td>
+<td><code>np.empty((2, 3))</code></td>
+</tr>
+<tr>
+<td><code>np.arange</code></td>
+<td>创建范围数组</td>
+<td><code>np.arange(0, 10, 2)</code></td>
+</tr>
+<tr>
+<td><code>np.linspace</code></td>
+<td>创建等间隔的值数组</td>
+<td><code>np.linspace(0, 1, 5)</code></td>
+</tr>
+<tr>
+<td><code>np.random.rand</code></td>
+<td>创建均匀分布随机数组</td>
+<td><code>np.random.rand(2, 3)</code></td>
+</tr>
+<tr>
+<td><code>np.random.randint</code></td>
+<td>创建随机整数数组</td>
+<td><code>np.random.randint(0, 10, (2, 3))</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-数组属性与形状"><a href="#2-数组属性与形状" class="headerlink" title="2. 数组属性与形状"></a><strong>2. 数组属性与形状</strong></h3><p>这些函数用于查看或修改数组的属性和形状。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.ndim</code></td>
+<td>返回数组维度</td>
+<td><code>a.ndim</code></td>
+</tr>
+<tr>
+<td><code>.shape</code></td>
+<td>返回数组形状</td>
+<td><code>a.shape</code></td>
+</tr>
+<tr>
+<td><code>.size</code></td>
+<td>返回数组总元素数</td>
+<td><code>a.size</code></td>
+</tr>
+<tr>
+<td><code>.dtype</code></td>
+<td>返回数组数据类型</td>
+<td><code>a.dtype</code></td>
+</tr>
+<tr>
+<td><code>.astype</code></td>
+<td>转换数组数据类型</td>
+<td><code>a.astype(&#39;float32&#39;)</code></td>
+</tr>
+<tr>
+<td><code>.reshape</code></td>
+<td>改变数组形状</td>
+<td><code>a.reshape(3, 2)</code></td>
+</tr>
+<tr>
+<td><code>.ravel</code></td>
+<td>将数组展平为一维</td>
+<td><code>a.ravel()</code></td>
+</tr>
+<tr>
+<td><code>.T</code></td>
+<td>转置数组</td>
+<td><code>a.T</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-数学运算"><a href="#3-数学运算" class="headerlink" title="3. 数学运算"></a><strong>3. 数学运算</strong></h3><p>这些函数用于执行数学运算。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.add</code></td>
+<td>数组加法</td>
+<td><code>np.add(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.subtract</code></td>
+<td>数组减法</td>
+<td><code>np.subtract(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.multiply</code></td>
+<td>数组乘法（元素级）</td>
+<td><code>np.multiply(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.divide</code></td>
+<td>数组除法（元素级）</td>
+<td><code>np.divide(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.power</code></td>
+<td>元素幂运算</td>
+<td><code>np.power(a, 2)</code></td>
+</tr>
+<tr>
+<td><code>np.sqrt</code></td>
+<td>元素平方根</td>
+<td><code>np.sqrt(a)</code></td>
+</tr>
+<tr>
+<td><code>np.exp</code></td>
+<td>指数函数</td>
+<td><code>np.exp(a)</code></td>
+</tr>
+<tr>
+<td><code>np.log</code></td>
+<td>自然对数</td>
+<td><code>np.log(a)</code></td>
+</tr>
+<tr>
+<td><code>np.sin</code> &#x2F; <code>np.cos</code></td>
+<td>三角函数</td>
+<td><code>np.sin(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-统计函数"><a href="#4-统计函数" class="headerlink" title="4. 统计函数"></a><strong>4. 统计函数</strong></h3><p>用于计算数组的统计属性。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.sum</code></td>
+<td>求和</td>
+<td><code>np.sum(a)</code></td>
+</tr>
+<tr>
+<td><code>np.mean</code></td>
+<td>平均值</td>
+<td><code>np.mean(a)</code></td>
+</tr>
+<tr>
+<td><code>np.median</code></td>
+<td>中位数</td>
+<td><code>np.median(a)</code></td>
+</tr>
+<tr>
+<td><code>np.std</code></td>
+<td>标准差</td>
+<td><code>np.std(a)</code></td>
+</tr>
+<tr>
+<td><code>np.var</code></td>
+<td>方差</td>
+<td><code>np.var(a)</code></td>
+</tr>
+<tr>
+<td><code>np.max</code> &#x2F; <code>np.min</code></td>
+<td>最大值&#x2F;最小值</td>
+<td><code>np.max(a)</code></td>
+</tr>
+<tr>
+<td><code>np.argmax</code></td>
+<td>最大值索引</td>
+<td><code>np.argmax(a)</code></td>
+</tr>
+<tr>
+<td><code>np.argmin</code></td>
+<td>最小值索引</td>
+<td><code>np.argmin(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="5-数组操作"><a href="#5-数组操作" class="headerlink" title="5. 数组操作"></a><strong>5. 数组操作</strong></h3><p>这些函数用于操作数组内容。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.concatenate</code></td>
+<td>拼接数组</td>
+<td><code>np.concatenate((a, b), axis=0)</code></td>
+</tr>
+<tr>
+<td><code>np.split</code></td>
+<td>分割数组</td>
+<td><code>np.split(a, 2)</code></td>
+</tr>
+<tr>
+<td><code>np.vstack</code></td>
+<td>垂直堆叠</td>
+<td><code>np.vstack((a, b))</code></td>
+</tr>
+<tr>
+<td><code>np.hstack</code></td>
+<td>水平堆叠</td>
+<td><code>np.hstack((a, b))</code></td>
+</tr>
+<tr>
+<td><code>np.flip</code></td>
+<td>翻转数组</td>
+<td><code>np.flip(a)</code></td>
+</tr>
+<tr>
+<td><code>np.sort</code></td>
+<td>排序</td>
+<td><code>np.sort(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="6-条件与过滤"><a href="#6-条件与过滤" class="headerlink" title="6. 条件与过滤"></a><strong>6. 条件与过滤</strong></h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.where</code></td>
+<td>根据条件选择</td>
+<td><code>np.where(a &gt; 2, a, 0)</code></td>
+</tr>
+<tr>
+<td><code>np.nonzero</code></td>
+<td>返回非零元素索引</td>
+<td><code>np.nonzero(a)</code></td>
+</tr>
+<tr>
+<td><code>np.unique</code></td>
+<td>获取数组的唯一值</td>
+<td><code>np.unique(a)</code></td>
+</tr>
+<tr>
+<td><code>np.isin</code></td>
+<td>判断元素是否在列表中</td>
+<td><code>np.isin(a, [1, 2])</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="7-线性代数"><a href="#7-线性代数" class="headerlink" title="7. 线性代数"></a><strong>7. 线性代数</strong></h3><p>这些函数用于矩阵运算。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.dot</code></td>
+<td>点积</td>
+<td><code>np.dot(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.matmul</code></td>
+<td>矩阵乘法</td>
+<td><code>np.matmul(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.inv</code></td>
+<td>矩阵求逆</td>
+<td><code>np.linalg.inv(a)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.det</code></td>
+<td>矩阵行列式</td>
+<td><code>np.linalg.det(a)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.eig</code></td>
+<td>特征值和特征向量</td>
+<td><code>np.linalg.eig(a)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.norm</code></td>
+<td>矩阵范数</td>
+<td><code>np.linalg.norm(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="8-随机数生成"><a href="#8-随机数生成" class="headerlink" title="8. 随机数生成"></a><strong>8. 随机数生成</strong></h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.random.rand</code></td>
+<td>均匀分布随机数</td>
+<td><code>np.random.rand(3, 3)</code></td>
+</tr>
+<tr>
+<td><code>np.random.randn</code></td>
+<td>标准正态分布随机数</td>
+<td><code>np.random.randn(3, 3)</code></td>
+</tr>
+<tr>
+<td><code>np.random.randint</code></td>
+<td>随机整数</td>
+<td><code>np.random.randint(0, 10, (2, 3))</code></td>
+</tr>
+<tr>
+<td><code>np.random.choice</code></td>
+<td>随机采样</td>
+<td><code>np.random.choice(a, 3)</code></td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

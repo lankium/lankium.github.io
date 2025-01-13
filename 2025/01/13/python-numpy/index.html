@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"yijun.love","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="NumPy 简介NumPy 是 Python 中处理多维数组和矩阵的核心库，提供了高效的数组运算功能，是数据科学、机器学习和科学计算的重要工具。 特点： 多维数组对象 (ndarray)：用于存储单一数据类型的矩阵。 广播机制：支持不同形状数组的运算。 高效性：使用底层 C 实现的高性能计算。 丰富的函数库：内置许多数学、统计和线性代数功能。  常用模块与函数1. 数组创建这些函数用于创建 Num">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python_numpy">
+<meta property="og:url" content="http://yijun.love/2025/01/13/python-numpy/index.html">
+<meta property="og:site_name" content="YiJun">
+<meta property="og:description" content="NumPy 简介NumPy 是 Python 中处理多维数组和矩阵的核心库，提供了高效的数组运算功能，是数据科学、机器学习和科学计算的重要工具。 特点： 多维数组对象 (ndarray)：用于存储单一数据类型的矩阵。 广播机制：支持不同形状数组的运算。 高效性：使用底层 C 实现的高性能计算。 丰富的函数库：内置许多数学、统计和线性代数功能。  常用模块与函数1. 数组创建这些函数用于创建 Num">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-01-13T02:57:42.000Z">
+<meta property="article:modified_time" content="2025-01-13T08:35:37.500Z">
+<meta property="article:author" content="YiJun">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://yijun.love/2025/01/13/python-numpy/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://yijun.love/2025/01/13/python-numpy/","path":"2025/01/13/python-numpy/","title":"python_numpy"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python_numpy | YiJun</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">YiJun</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NumPy-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">NumPy 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">特点：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">常用模块与函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B0%E7%BB%84%E5%88%9B%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">1. 数组创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E7%BB%84%E5%B1%9E%E6%80%A7%E4%B8%8E%E5%BD%A2%E7%8A%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2. 数组属性与形状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="nav-number">2.3.</span> <span class="nav-text">3. 数学运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E7%BB%9F%E8%AE%A1%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">4. 统计函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C"><span class="nav-number">2.5.</span> <span class="nav-text">5. 数组操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E6%9D%A1%E4%BB%B6%E4%B8%8E%E8%BF%87%E6%BB%A4"><span class="nav-number">2.6.</span> <span class="nav-text">6. 条件与过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0"><span class="nav-number">2.7.</span> <span class="nav-text">7. 线性代数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E9%9A%8F%E6%9C%BA%E6%95%B0%E7%94%9F%E6%88%90"><span class="nav-number">2.8.</span> <span class="nav-text">8. 随机数生成</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">YiJun</p>
+  <div class="site-description" itemprop="description">记录</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yijun.love/2025/01/13/python-numpy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="YiJun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YiJun">
+      <meta itemprop="description" content="记录">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="python_numpy | YiJun">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python_numpy
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-01-13 10:57:42 / 修改时间：16:35:37" itemprop="dateCreated datePublished" datetime="2025-01-13T10:57:42+08:00">2025-01-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="NumPy-简介"><a href="#NumPy-简介" class="headerlink" title="NumPy 简介"></a><strong>NumPy 简介</strong></h2><p>NumPy 是 Python 中处理多维数组和矩阵的核心库，提供了高效的数组运算功能，是数据科学、机器学习和科学计算的重要工具。</p>
+<h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a><strong>特点：</strong></h3><ol>
+<li><strong>多维数组对象</strong> (<code>ndarray</code>)：用于存储单一数据类型的矩阵。</li>
+<li><strong>广播机制</strong>：支持不同形状数组的运算。</li>
+<li><strong>高效性</strong>：使用底层 C 实现的高性能计算。</li>
+<li><strong>丰富的函数库</strong>：内置许多数学、统计和线性代数功能。</li>
+</ol>
+<h2 id="常用模块与函数"><a href="#常用模块与函数" class="headerlink" title="常用模块与函数"></a><strong>常用模块与函数</strong></h2><h3 id="1-数组创建"><a href="#1-数组创建" class="headerlink" title="1. 数组创建"></a><strong>1. 数组创建</strong></h3><p>这些函数用于创建 NumPy 数组。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.array</code></td>
+<td>从列表或元组创建数组</td>
+<td><code>np.array([1, 2, 3])</code></td>
+</tr>
+<tr>
+<td><code>np.zeros</code></td>
+<td>创建全零数组</td>
+<td><code>np.zeros((3, 2))</code></td>
+</tr>
+<tr>
+<td><code>np.ones</code></td>
+<td>创建全一数组</td>
+<td><code>np.ones((2, 2))</code></td>
+</tr>
+<tr>
+<td><code>np.full</code></td>
+<td>创建指定值填充的数组</td>
+<td><code>np.full((2, 3), 5)</code></td>
+</tr>
+<tr>
+<td><code>np.eye</code></td>
+<td>创建单位矩阵</td>
+<td><code>np.eye(3)</code></td>
+</tr>
+<tr>
+<td><code>np.empty</code></td>
+<td>创建未初始化的数组（内容随机）</td>
+<td><code>np.empty((2, 3))</code></td>
+</tr>
+<tr>
+<td><code>np.arange</code></td>
+<td>创建范围数组</td>
+<td><code>np.arange(0, 10, 2)</code></td>
+</tr>
+<tr>
+<td><code>np.linspace</code></td>
+<td>创建等间隔的值数组</td>
+<td><code>np.linspace(0, 1, 5)</code></td>
+</tr>
+<tr>
+<td><code>np.random.rand</code></td>
+<td>创建均匀分布随机数组</td>
+<td><code>np.random.rand(2, 3)</code></td>
+</tr>
+<tr>
+<td><code>np.random.randint</code></td>
+<td>创建随机整数数组</td>
+<td><code>np.random.randint(0, 10, (2, 3))</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-数组属性与形状"><a href="#2-数组属性与形状" class="headerlink" title="2. 数组属性与形状"></a><strong>2. 数组属性与形状</strong></h3><p>这些函数用于查看或修改数组的属性和形状。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.ndim</code></td>
+<td>返回数组维度</td>
+<td><code>a.ndim</code></td>
+</tr>
+<tr>
+<td><code>.shape</code></td>
+<td>返回数组形状</td>
+<td><code>a.shape</code></td>
+</tr>
+<tr>
+<td><code>.size</code></td>
+<td>返回数组总元素数</td>
+<td><code>a.size</code></td>
+</tr>
+<tr>
+<td><code>.dtype</code></td>
+<td>返回数组数据类型</td>
+<td><code>a.dtype</code></td>
+</tr>
+<tr>
+<td><code>.astype</code></td>
+<td>转换数组数据类型</td>
+<td><code>a.astype(&#39;float32&#39;)</code></td>
+</tr>
+<tr>
+<td><code>.reshape</code></td>
+<td>改变数组形状</td>
+<td><code>a.reshape(3, 2)</code></td>
+</tr>
+<tr>
+<td><code>.ravel</code></td>
+<td>将数组展平为一维</td>
+<td><code>a.ravel()</code></td>
+</tr>
+<tr>
+<td><code>.T</code></td>
+<td>转置数组</td>
+<td><code>a.T</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="3-数学运算"><a href="#3-数学运算" class="headerlink" title="3. 数学运算"></a><strong>3. 数学运算</strong></h3><p>这些函数用于执行数学运算。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.add</code></td>
+<td>数组加法</td>
+<td><code>np.add(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.subtract</code></td>
+<td>数组减法</td>
+<td><code>np.subtract(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.multiply</code></td>
+<td>数组乘法（元素级）</td>
+<td><code>np.multiply(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.divide</code></td>
+<td>数组除法（元素级）</td>
+<td><code>np.divide(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.power</code></td>
+<td>元素幂运算</td>
+<td><code>np.power(a, 2)</code></td>
+</tr>
+<tr>
+<td><code>np.sqrt</code></td>
+<td>元素平方根</td>
+<td><code>np.sqrt(a)</code></td>
+</tr>
+<tr>
+<td><code>np.exp</code></td>
+<td>指数函数</td>
+<td><code>np.exp(a)</code></td>
+</tr>
+<tr>
+<td><code>np.log</code></td>
+<td>自然对数</td>
+<td><code>np.log(a)</code></td>
+</tr>
+<tr>
+<td><code>np.sin</code> &#x2F; <code>np.cos</code></td>
+<td>三角函数</td>
+<td><code>np.sin(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="4-统计函数"><a href="#4-统计函数" class="headerlink" title="4. 统计函数"></a><strong>4. 统计函数</strong></h3><p>用于计算数组的统计属性。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.sum</code></td>
+<td>求和</td>
+<td><code>np.sum(a)</code></td>
+</tr>
+<tr>
+<td><code>np.mean</code></td>
+<td>平均值</td>
+<td><code>np.mean(a)</code></td>
+</tr>
+<tr>
+<td><code>np.median</code></td>
+<td>中位数</td>
+<td><code>np.median(a)</code></td>
+</tr>
+<tr>
+<td><code>np.std</code></td>
+<td>标准差</td>
+<td><code>np.std(a)</code></td>
+</tr>
+<tr>
+<td><code>np.var</code></td>
+<td>方差</td>
+<td><code>np.var(a)</code></td>
+</tr>
+<tr>
+<td><code>np.max</code> &#x2F; <code>np.min</code></td>
+<td>最大值&#x2F;最小值</td>
+<td><code>np.max(a)</code></td>
+</tr>
+<tr>
+<td><code>np.argmax</code></td>
+<td>最大值索引</td>
+<td><code>np.argmax(a)</code></td>
+</tr>
+<tr>
+<td><code>np.argmin</code></td>
+<td>最小值索引</td>
+<td><code>np.argmin(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="5-数组操作"><a href="#5-数组操作" class="headerlink" title="5. 数组操作"></a><strong>5. 数组操作</strong></h3><p>这些函数用于操作数组内容。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.concatenate</code></td>
+<td>拼接数组</td>
+<td><code>np.concatenate((a, b), axis=0)</code></td>
+</tr>
+<tr>
+<td><code>np.split</code></td>
+<td>分割数组</td>
+<td><code>np.split(a, 2)</code></td>
+</tr>
+<tr>
+<td><code>np.vstack</code></td>
+<td>垂直堆叠</td>
+<td><code>np.vstack((a, b))</code></td>
+</tr>
+<tr>
+<td><code>np.hstack</code></td>
+<td>水平堆叠</td>
+<td><code>np.hstack((a, b))</code></td>
+</tr>
+<tr>
+<td><code>np.flip</code></td>
+<td>翻转数组</td>
+<td><code>np.flip(a)</code></td>
+</tr>
+<tr>
+<td><code>np.sort</code></td>
+<td>排序</td>
+<td><code>np.sort(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="6-条件与过滤"><a href="#6-条件与过滤" class="headerlink" title="6. 条件与过滤"></a><strong>6. 条件与过滤</strong></h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.where</code></td>
+<td>根据条件选择</td>
+<td><code>np.where(a &gt; 2, a, 0)</code></td>
+</tr>
+<tr>
+<td><code>np.nonzero</code></td>
+<td>返回非零元素索引</td>
+<td><code>np.nonzero(a)</code></td>
+</tr>
+<tr>
+<td><code>np.unique</code></td>
+<td>获取数组的唯一值</td>
+<td><code>np.unique(a)</code></td>
+</tr>
+<tr>
+<td><code>np.isin</code></td>
+<td>判断元素是否在列表中</td>
+<td><code>np.isin(a, [1, 2])</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="7-线性代数"><a href="#7-线性代数" class="headerlink" title="7. 线性代数"></a><strong>7. 线性代数</strong></h3><p>这些函数用于矩阵运算。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.dot</code></td>
+<td>点积</td>
+<td><code>np.dot(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.matmul</code></td>
+<td>矩阵乘法</td>
+<td><code>np.matmul(a, b)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.inv</code></td>
+<td>矩阵求逆</td>
+<td><code>np.linalg.inv(a)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.det</code></td>
+<td>矩阵行列式</td>
+<td><code>np.linalg.det(a)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.eig</code></td>
+<td>特征值和特征向量</td>
+<td><code>np.linalg.eig(a)</code></td>
+</tr>
+<tr>
+<td><code>np.linalg.norm</code></td>
+<td>矩阵范数</td>
+<td><code>np.linalg.norm(a)</code></td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="8-随机数生成"><a href="#8-随机数生成" class="headerlink" title="8. 随机数生成"></a><strong>8. 随机数生成</strong></h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+<th>示例代码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>np.random.rand</code></td>
+<td>均匀分布随机数</td>
+<td><code>np.random.rand(3, 3)</code></td>
+</tr>
+<tr>
+<td><code>np.random.randn</code></td>
+<td>标准正态分布随机数</td>
+<td><code>np.random.randn(3, 3)</code></td>
+</tr>
+<tr>
+<td><code>np.random.randint</code></td>
+<td>随机整数</td>
+<td><code>np.random.randint(0, 10, (2, 3))</code></td>
+</tr>
+<tr>
+<td><code>np.random.choice</code></td>
+<td>随机采样</td>
+<td><code>np.random.choice(a, 3)</code></td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/30/TCP-IP/" rel="prev" title="TCP/IP">
+                  <i class="fa fa-angle-left"></i> TCP/IP
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">YiJun</span>
+  </div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div> -->
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
